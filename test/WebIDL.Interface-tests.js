@@ -37,8 +37,15 @@ require(["types/Interface"], function(Interface) {
     });
 
     requirement = "If V is a platform object that implements I, then return the IDL interface type value that represents a reference to that platform object.";
+    QUnit.test(requirement, function(){
+      var testDate = new Date();
+      QUnit.strictEqual(window.WebIDL.Interface(testDate), testDate, 'Date is a valid platform object');
+    });
 
     requirement = "If V is a user object that is considered to implement I according to the rules in section 4.7, then return the IDL interface type value that represents a reference to that user object.";
-
+    QUnit.test(requirement, function(){
+      var userObj = Object.create({});
+      QUnit.strictEqual(window.WebIDL.Interface(userObj.constructor.prototype), Object.prototype, 'Object.create is valid user object.');
+    });
 
 });
